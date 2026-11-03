@@ -1,0 +1,57 @@
+# ==============================================================================
+# SYNORA — Docker Ignore Rules
+# Excludes development virtualenvs, datasets, frontend assets, research caches,
+# test partitions, and temporary files from the backend container build context.
+# ==============================================================================
+
+# Git and IDE metadata
+.git/
+.gitignore
+.gitattributes
+.idea/
+.vscode/
+
+# Python virtual environments & build artifacts
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Frontend (deployed separately on Vercel / Cloudflare Pages)
+frontend/
+
+# Research partitions & raw audio datasets (strictly excluded from deployment image)
+data/
+benchmark/
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.parquet
+*.npz
+
+# Test suites and development verification scripts
+tests/
+test_*.py
+evaluate_*.py
+train_*.py
+inspect_*.py
+build_benchmark.py
+cache_features.py
+
+# Research reports and experiment history
+experiments/
+phase_*.md
+
+# Scratchpads and local logs
+scratch/
+*.log
+*.tmp
+node_modules/
+

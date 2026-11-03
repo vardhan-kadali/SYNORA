@@ -1,0 +1,40 @@
+{
+  "temperature": 1.1229901304,
+  "optimization_status": {
+    "success": true,
+    "message": "Solution found.",
+    "num_function_evaluations": 14,
+    "bounds": [
+      0.05,
+      10.0
+    ],
+    "method": "scipy.optimize.minimize_scalar (bounded Brent)"
+  },
+  "calibration_metrics_dev_oof": {
+    "before_temperature_scaling": {
+      "temperature": 1.0,
+      "negative_log_likelihood": 0.31993902,
+      "brier_score": 0.09928913,
+      "expected_calibration_error_10bin": 0.10210165
+    },
+    "after_temperature_scaling": {
+      "temperature": 1.12299013,
+      "negative_log_likelihood": 0.31822555,
+      "brier_score": 0.0994355,
+      "expected_calibration_error_10bin": 0.09341549
+    },
+    "metric_deltas": {
+      "delta_nll": -0.00171347,
+      "delta_brier": 0.00014637,
+      "delta_ece": -0.00868616
+    }
+  },
+  "scientific_limitation_statement": "Exploratory post-hoc score adjustment only. Temperature T was fitted on pooled OOF logits originating from 5 cross-validation fold models trained on N=48 instances each. The deployable final model was trained on N=60 instances, inducing a score-scale mismatch. Calibrated outputs must be designated as temperature-scaled pseudo-probabilities, never as proven Bayesian posteriors.",
+  "metadata": {
+    "phase": "3.2.4.2B",
+    "timestamp_utc": "2026-11-03T18:34:33.512188+00:00",
+    "candidate_id": "candidate_a_combined",
+    "feature_dim": 40,
+    "source_oof_logits": "experiments/phase_3_2_4_2_oof_logits/oof_logits.csv"
+  }
+}

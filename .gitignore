@@ -1,0 +1,70 @@
+# ==============================================================================
+# SYNORA — Root Git Ignore Rules for Deployment Repository
+# ==============================================================================
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+.deployment_test_venv/
+
+# Python Bytecode & Compiled Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Raw Audio Datasets & Partitions (STRICTLY QUARANTINED)
+data/
+benchmark/
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+*.aac
+*.opus
+
+# Feature Caches & Binary Arrays
+*.npz
+*.npy
+*.parquet
+
+# Research Experiments, Scratchpads & Intermediate Models
+experiments/
+models/
+scratch/
+g711_tables.npz
+
+# Logs and Temporary Files
+*.log
+*.tmp
+
+# Local Development, Benchmarking & Research Scripts
+# (Keeps production deployment repository lean and isolated)
+/test_*.py
+train_*.py
+evaluate_*.py
+inspect_*.py
+build_benchmark.py
+cache_features.py
+audit_*.py
+phase_*.md
+requirements-api.txt
+
+# Frontend Build Artifacts, Dependencies & Local Secrets
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.env
+frontend/.env*.local
+frontend/*.local
+
+# IDE, Editor & OS Metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+

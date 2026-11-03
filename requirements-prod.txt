@@ -1,0 +1,35 @@
+# ==============================================================================
+# SYNORA — Production Runtime Dependencies
+# Phase 3.2.5 Stage 5B: Free Cloud Deployment Package
+# Architecture: FastAPI + Uvicorn + Frozen Scikit-Learn Inference Pipeline
+# Python Target: 3.11.x (CPython 64-bit Linux)
+# ==============================================================================
+
+# --- Web Framework & ASGI Server ---
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.33
+pydantic==2.14.2
+starlette==1.10.0
+
+# --- Core Numerical & Signal Processing (DSP) ---
+# NumPy: Array manipulation, spectrogram framing, and matrix operations
+numpy==2.4.6
+
+# SciPy: Polyphase audio resampling (scipy.signal.resample_poly) and sigmoid (scipy.special.expit)
+scipy==1.17.1
+
+# SoundFile: Multi-format audio decoding (WAV, FLAC, OGG) via libsndfile
+soundfile==0.14.0
+
+# --- Machine Learning Inference Engine ---
+# Scikit-learn: Required to unpickle and execute frozen StandardScaler and LogisticRegression
+scikit-learn==1.9.1
+
+# Joblib: Authoritative model artifact deserialization with SHA256 integrity checks
+joblib==1.6.0
+
+# --- Runtime Module Dependency ---
+# Pandas: Required by top-level import in cache_features_v2.py (authoritative DSP extractor)
+pandas==3.1.0
+

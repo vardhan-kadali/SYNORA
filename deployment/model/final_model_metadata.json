@@ -1,0 +1,92 @@
+{
+  "model_identity": {
+    "candidate_id": "candidate_a_combined",
+    "candidate_name": "Multi-Cue Composite Representation (Delta-MFCC + LFCC + Sub-Bands + Flatness + Flux)",
+    "feature_dim": 40,
+    "training_partition": "Development Partition (All N=60 Samples)",
+    "unique_base_recording_clusters": 20,
+    "acoustic_conditions_per_cluster": 3,
+    "total_training_instances": 60
+  },
+  "feature_cache_provenance": {
+    "cache_file": "data/cache/dev_features_v2.npz",
+    "cache_sha256": "9c0b163be41baf3242ef7aab1fa47fba1498625be978c48f8f1273329b14d0ab",
+    "cache_verified": true
+  },
+  "oof_logits_provenance": {
+    "oof_logits_file": "experiments/phase_3_2_4_2_oof_logits/oof_logits.csv",
+    "num_oof_records": 60,
+    "cross_validation_splits": "5-fold StratifiedGroupKFold (seed=42)",
+    "probability_difference_vs_historical": 0.0
+  },
+  "scaler_specification": {
+    "estimator": "sklearn.preprocessing.StandardScaler",
+    "copy": true,
+    "with_mean": true,
+    "with_std": true,
+    "features_in": 40,
+    "artifact_file": "final_scaler.joblib",
+    "sha256": "d2b6030b2e753c7a8e345281d5cd6c9c260dcbadc5e2c04df8acf3523bf143c3"
+  },
+  "classifier_specification": {
+    "estimator": "sklearn.linear_model.LogisticRegression",
+    "penalty": "l2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 1000,
+    "random_state": 42,
+    "intercept": 0.2716711461544037,
+    "coef_l2_norm": 2.5321483612060547,
+    "classes": [
+      0,
+      1
+    ],
+    "positive_class": 1,
+    "positive_class_label": "Synthetic/Fake Audio",
+    "negative_class": 0,
+    "negative_class_label": "Genuine/Real Audio",
+    "artifact_file": "final_classifier.joblib",
+    "sha256": "052ccc2e26a2b8a9bf2cb56723f6258c32d21faa26d43a7f5054fca4c6d7f67b"
+  },
+  "decision_policy": {
+    "decision_threshold": 0.5,
+    "raw_score_pathway": "sigmoid(clf.decision_function(x))",
+    "scaled_score_pathway": "sigmoid(clf.decision_function(x) / temperature)",
+    "decision_rule": "target_fake = int(scaled_score >= 0.50)"
+  },
+  "temperature_scaling": {
+    "temperature": 1.1229901304,
+    "optimizer": "scipy.optimize.minimize_scalar (bounded Brent)",
+    "optimization_bounds": [
+      0.05,
+      10.0
+    ],
+    "status": "Converged",
+    "artifact_file": "temperature_scaling.json",
+    "sha256": "0e08660598c8d4a9cf6c7f239d198f1d26fae2865113f358ef2e8cffdadb1c24",
+    "metrics_dev_oof": {
+      "nll_unscaled": 0.31993902,
+      "nll_scaled": 0.31822555,
+      "brier_unscaled": 0.09928913,
+      "brier_scaled": 0.0994355,
+      "ece_unscaled": 0.10210165,
+      "ece_scaled": 0.09341549
+    }
+  },
+  "data_boundary_assertions": {
+    "calibration_data_accessed": false,
+    "calibration_cache_loaded": false,
+    "test_data_accessed": false,
+    "test_cache_exists": false,
+    "threshold_tuned": false
+  },
+  "system_environment": {
+    "python_version": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "numpy_version": "2.4.6",
+    "pandas_version": "3.1.0",
+    "scikit_learn_version": "1.6.1",
+    "joblib_version": "1.6.0"
+  },
+  "timestamp_utc": "2026-11-03T18:34:33.583141+00:00",
+  "phase": "3.2.4.2B"
+}
