@@ -35,11 +35,27 @@ from synora.dsp.extractor import extract_features
 
 
 def compute_file_sha256(filepath: Path | str) -> str:
-    """Computes SHA256 checksum of a file in 64 KB chunks."""
+    """
+    Computes SHA256 checksum of a file.
+
+    For JSON text artifacts (.json), CRLF line endings (b'\\r\\n') are normalized
+    to LF (b'\\n') in-memory before hashing to guarantee deterministic, identical
+    checksums across Windows and Linux environments.
+
+    For binary artifacts (.joblib, etc.), raw bytes are hashed directly without
+    alteration. Files on disk are never modified.
+    """
+    path = Path(filepath)
     sha = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        while chunk := f.read(65536):
-            sha.update(chunk)
+
+    if path.suffix.lower() == ".json":
+        content = path.read_bytes().replace(b"\r\n", b"\n")
+        sha.update(content)
+    else:
+        with open(path, "rb") as f:
+            while chunk := f.read(65536):
+                sha.update(chunk)
+
     return sha.hexdigest().lower()
 
 
