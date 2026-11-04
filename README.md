@@ -17,6 +17,7 @@ The project explores acoustic feature engineering and statistical machine learni
 ## Table of Contents
 
 - [The Problem](#the-problem)
+- [Challenge Track: Future Tech](#challenge-track-future-tech)
 - [Our Solution](#our-solution)
 - [Key Features](#key-features)
 - [System Architecture](#system-architecture)
@@ -50,6 +51,16 @@ While these technologies have valuable applications, they also create risks:
 Traditional listening alone may not always be sufficient to identify synthetic audio.
 
 There is a growing need for accessible tools that can analyze speech recordings and provide additional evidence about their authenticity.
+
+## Challenge Track: Future Tech
+
+**Selected Problem Statement: FT-02 — Deepfake & Synthetic Media Detection**
+
+SYNORA aligns with the Future Tech track of Neural Storm 2026. It focuses on detecting AI-generated and manipulated speech recordings using acoustic feature extraction and machine learning.
+
+AI-generated voice impersonation can contribute to identity misuse, fraudulent calls and misleading audio recordings. SYNORA explores how machine learning-based audio analysis can help people investigate potentially synthetic speech and make more informed decisions.
+
+Our goal is to contribute to safer digital communication while communicating the limitations of automated detection.
 
 ## Our Solution
 
@@ -210,7 +221,22 @@ Files exceeding configured upload or duration limits are rejected by the backend
 
 SYNORA uses a Logistic Regression classifier trained on a controlled development dataset.
 
-For model evaluation, the research workflow separates development, calibration and test partitions to reduce data leakage and preserve evaluation integrity.
+The research workflow separates development, calibration and test partitions. Metadata audits identified some speaker overlap across partitions, so the evaluation should be interpreted with this limitation in mind.
+
+### Dataset Overview
+
+The controlled benchmark contains 180 audio samples distributed equally across three partitions.
+
+| Partition | Total Samples | Fake | Real |
+|---|---:|---:|---:|
+| Development | 60 | 30 | 30 |
+| Calibration | 60 | 30 | 30 |
+| Test | 60 | 30 | 30 |
+| **Total** | **180** | **90** | **90** |
+
+The development partition is used for model development, the calibration partition supports the reported one-time evaluation, and the held-out test partition has not been used for model selection or performance tuning.
+
+The benchmark includes human speech, synthetic speech and multiple acoustic recording conditions.
 
 ### One-Time Calibration Evaluation
 
@@ -223,6 +249,24 @@ The following results were obtained during the one-time evaluation on the calibr
 | Fake Precision | 94.74% |
 | Fake Recall | 60.00% |
 | Fake F1-score | 73.47% |
+
+### Confusion Matrix
+
+The following confusion matrix summarizes the one-time calibration evaluation at the fixed decision threshold of 0.50.
+
+| Actual / Predicted | Fake | Real |
+|---|---:|---:|
+| Fake | 18 | 12 |
+| Real | 1 | 29 |
+
+### Additional Metric
+
+| Metric | Result |
+|---|---:|
+| Real Recall (Specificity for Fake detection) | 96.67% |
+| Decision Threshold | 0.50 |
+
+The model correctly identified 18 of 30 Fake samples and 29 of 30 Real samples in this calibration evaluation.
 
 **Evaluation context:**
 
@@ -240,7 +284,7 @@ In particular, telephone-bandlimited audio was a challenging condition, with 4 o
 
 These findings highlight the importance of evaluating deepfake detectors across different recording environments and speech-generation systems.
 
-**Evaluation integrity:** The calibration results are reported as a one-time evaluation. The independent Test partition has not been used for final performance claims, and no Test results are reported here.
+**Evaluation integrity:** The calibration results are reported as a one-time evaluation. The held-out Test partition has not been used for model selection or performance tuning, and no Test results are reported here.
 
 These results must not be interpreted as guaranteed performance on arbitrary real-world recordings.
 
@@ -277,7 +321,10 @@ The displayed probability estimates are exploratory temperature-scaled model sco
 
 **Backend health check:** https://synora-api-5z0r.onrender.com/health
 
+**Video Demonstration:** https://youtu.be/u6mXHYpH6nQ
+
 The application provides a web-based interface for uploading an audio recording and viewing the analysis result.
+
 
 ### Screenshots
 
