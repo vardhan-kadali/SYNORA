@@ -1,4 +1,6 @@
 # SYNORA
+<img width="1813" height="906" alt="image" src="https://github.com/user-attachments/assets/ae3f3ccc-728a-4c6c-890d-0bc7e5c42266" />
+
 
 > **Detecting the Synthetic. Protecting the Real.**
 
@@ -279,19 +281,13 @@ The application provides a web-based interface for uploading an audio recording 
 
 ### Screenshots
 
-Screenshots of the deployed application and its analysis results should be added here.
+<img width="1899" height="908" alt="image" src="https://github.com/user-attachments/assets/59aae713-97b5-4144-8237-3291732e7872" />
 
-Suggested repository location:
+<img width="1898" height="904" alt="image" src="https://github.com/user-attachments/assets/8057dc83-74b3-4189-b753-d55589f1d4a0" />
 
-```text
-docs/
-    screenshots/
-        home.png
-        upload.png
-        analysis-result.png
-```
+<img width="1731" height="904" alt="image" src="https://github.com/user-attachments/assets/b72e715c-6cbf-48b8-b9c9-1a69e948c566" />
 
----
+
 
 ## Local Installation and Setup
 
